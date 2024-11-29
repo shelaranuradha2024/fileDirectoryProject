@@ -32,11 +32,19 @@ Before running the project, ensure you have the following installed:
 ## Installation
 
 ### 1. Clone the repository
-```bash
-git clone https://github.com/shelaranuradha2024/file-directory.git
-cd file-directory-backend
-
+       1.to clone repository: Use terminal (Git bash, cmd)
+git clone https://github.com/shelaranuradha2024/fileDirectoryProject.git
+ 2: Open the Project in Visual Studio Code and navigate to clone repository
+cd fileDirectoryProject
+3. Open the project in Visual Studio Code
+    git checkout -b backend      //for backend branch
+4. git pull origin backend
+5.-->code.
+5: Install Dependencies
 npm install
+6.npm start
+It will show : Server is running on http://localhost:5000
+
 
 
 ##  Create a PostgreSQL database 
