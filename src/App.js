@@ -1,7 +1,7 @@
 // /src/App.js
 import React from "react";
 import FileManager from "./components/FileManager";
-import "./styles/index.css";  
+import "./index.css";  
 
 const App = () => {
   return (
