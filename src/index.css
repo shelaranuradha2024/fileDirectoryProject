@@ -94,16 +94,6 @@ body {
   background-color: #fff;
 }
 
-/* Box around the File Directory heading */
-.directory-box {
-  background-color: #f0f0f0; 
-  border: 2px solid #2c3e50; 
-  border-radius: 8px;
-  padding: 1px; 
-  width: 21%; 
-  margin-bottom: 20px; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
 
 /* Heading style */
 .file-directory-heading {
@@ -125,7 +115,6 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
-/* Optional: Add a background color to the header */
 body {
   background-color: #f4f4f4; /* Light background color */
 }
