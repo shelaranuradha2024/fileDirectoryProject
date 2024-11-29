@@ -31,7 +31,7 @@ This project is a **File Directory UI** built with **React.js**, **HTML**, and *
 
 Before running the project, ensure you have the following installed:
 
-- **VS code**: [Download Node.js](https://nodejs.org/) node 18.x.x version 
+- **VS code**: [https://code.visualstudio.com/download]
 
 - **Node.js**: [Download Node.js](https://nodejs.org/) node 18.x.x version 
 - **npm**: npm is included with Node.js, but you can also install it separately via [npm](https://www.npmjs.com/).

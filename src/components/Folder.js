@@ -10,7 +10,7 @@ const Folder = ({
   handleDeleteFile,
   handleCreateFile,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false); // Track folder expansion state
+  const [isExpanded, setIsExpanded] = useState(false); 
 
   // Toggle expand/collapse
   const toggleExpandCollapse = () => {
