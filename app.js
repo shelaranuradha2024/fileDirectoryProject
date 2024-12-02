@@ -134,6 +134,28 @@ app.delete('/api/files/:id', async (req, res) => {
   }
 });
 
+// Move a file to another folder
+app.put('/api/files/move/:id', async (req, res) => {
+  const { id } = req.params;
+  const { newFolderId } = req.body;  // The new folder ID
+
+  try {
+    const result = await pool.query(
+      'UPDATE files SET folder_id = $1 WHERE id = $2 RETURNING *',
+      [newFolderId, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('File not found');
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error moving file:', err);
+    res.status(500).send('Error moving file');
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
