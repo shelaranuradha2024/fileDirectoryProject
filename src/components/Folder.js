@@ -9,8 +9,11 @@ const Folder = ({
   handleRenameFile,
   handleDeleteFile,
   handleCreateFile,
+  handleDragStart,
+  handleDrop,
+  handleDragOver,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false); 
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Toggle expand/collapse
   const toggleExpandCollapse = () => {
@@ -18,15 +21,17 @@ const Folder = ({
   };
 
   return (
-    <div className="folder">
+    <div
+      className="folder"
+      onDragOver={handleDragOver} // Allow drop only for files
+      onDrop={(e) => handleDrop(e, folder.id)} // Drop handler for files only
+    >
       <h3>
-        {/* "+" and "-" button for expand/collapse */}
         <button className="toggle" onClick={toggleExpandCollapse}>
           {isExpanded ? "-" : "+"}
         </button>
         {folder.name}
 
-        {/* Rename and Delete buttons */}
         <div className="folder-buttons">
           <button className="rename" onClick={() => handleRename(folder.id)}>
             Rename
@@ -37,14 +42,12 @@ const Folder = ({
         </div>
       </h3>
 
-      {/* Create File button (aligned horizontally with other buttons) */}
       <div className="folder-buttons">
         <button className="create-file" onClick={() => handleCreateFile(folder.id)}>
           Create File
         </button>
       </div>
 
-      {/* Render folder contents if expanded */}
       {isExpanded && (
         <div className="folder-contents">
           {folder.files && folder.files.length > 0 ? (
@@ -55,27 +58,13 @@ const Folder = ({
                 folderId={folder.id}
                 handleRenameFile={handleRenameFile}
                 handleDeleteFile={handleDeleteFile}
+                handleDragStart={handleDragStart}
+                handleDragOver={handleDragOver}
+                handleDrop={handleDrop}
               />
             ))
           ) : (
             <p>No files in this folder</p>
-          )}
-
-          {/* Render subfolders recursively if they exist */}
-          {folder.children && folder.children.length > 0 && (
-            <div className="subfolders">
-              {folder.children.map((subfolder) => (
-                <Folder
-                  key={subfolder.id}
-                  folder={subfolder}
-                  handleRename={handleRename}
-                  handleDelete={handleDelete}
-                  handleRenameFile={handleRenameFile}
-                  handleDeleteFile={handleDeleteFile}
-                  handleCreateFile={handleCreateFile}
-                />
-              ))}
-            </div>
           )}
         </div>
       )}
