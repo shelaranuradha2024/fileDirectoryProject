@@ -134,6 +134,59 @@ const FileManager = () => {
     }
   };
 
+  const handleDragStart = (e, item, type) => {
+    e.dataTransfer.setData("item", JSON.stringify(item));
+    e.dataTransfer.setData("type", type); // 'file' or 'folder'
+  };
+
+  const handleDrop = (e, targetFolderId) => {
+    e.preventDefault();
+    const item = JSON.parse(e.dataTransfer.getData("item"));
+    const type = e.dataTransfer.getData("type");
+
+    if (type === "file") {
+      // Move file
+      setDirectories((prev) =>
+        prev.map((folder) =>
+          folder.id === targetFolderId
+            ? {
+                ...folder,
+                files: [...(folder.files || []), item],
+              }
+            : folder.id === item.folderId
+            ? {
+                ...folder,
+                files: folder.files.filter((file) => file.id !== item.id),
+              }
+            : folder
+        )
+      );
+    } else if (type === "folder") {
+      // Move folder
+      setDirectories((prev) =>
+        prev.map((folder) => {
+          if (folder.id === targetFolderId) {
+            return {
+              ...folder,
+              children: [...(folder.children || []), item],
+            };
+          }
+          if (folder.id === item.parentId) {
+            return {
+              ...folder,
+              children: folder.children.filter((child) => child.id !== item.id),
+            };
+          }
+          return folder;
+        })
+      );
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault(); // Allow drop
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -157,6 +210,9 @@ const FileManager = () => {
             handleRenameFile={handleRenameFile}
             handleDeleteFile={handleDeleteFile}
             handleCreateFile={handleCreateFile}
+            handleDragStart={handleDragStart}
+            handleDrop={handleDrop}
+            handleDragOver={handleDragOver}
           />
         ))}
       </div>
